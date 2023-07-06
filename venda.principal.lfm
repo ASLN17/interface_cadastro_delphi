@@ -1,0 +1,54 @@
+object formPrincipal: TformPrincipal
+  Left = 613
+  Height = 309
+  Top = 253
+  Width = 631
+  Caption = 'Projeto Venda'
+  ClientHeight = 309
+  ClientWidth = 631
+  OnCreate = FormCreate
+  object btnCadastroCliente: TButton
+    Left = 248
+    Height = 25
+    Top = 16
+    Width = 128
+    Caption = 'Cadastro Cliente'
+    OnClick = btnCadastroClienteClick
+    TabOrder = 0
+  end
+  object btnVendas: TButton
+    Left = 248
+    Height = 25
+    Top = 96
+    Width = 128
+    Caption = 'Venda'
+    OnClick = btnVendasClick
+    TabOrder = 1
+  end
+  object btnCadastroProduto: TButton
+    Left = 248
+    Height = 25
+    Top = 56
+    Width = 128
+    Caption = 'Cadastro Produto'
+    OnClick = btnCadastroProdutoClick
+    TabOrder = 2
+  end
+  object btnVendas1: TButton
+    Left = 416
+    Height = 25
+    Top = 168
+    Width = 128
+    Caption = 'Com Free'
+    TabOrder = 3
+  end
+  object btnVendas2: TButton
+    Left = 416
+    Height = 25
+    Top = 196
+    Width = 128
+    Caption = 'SemFree'
+    OnClick = btnVendas2Click
+    TabOrder = 4
+  end
+end

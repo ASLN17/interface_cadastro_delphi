@@ -1,0 +1,188 @@
+object formVendas: TformVendas
+  Left = 330
+  Height = 416
+  Top = 136
+  Width = 760
+  Caption = 'Vender'
+  ClientHeight = 416
+  ClientWidth = 760
+  OnCreate = FormCreate
+  OnHide = FormHide
+  OnShow = FormShow
+  LCLVersion = '2.2.6.0'
+  object ComboBoxCliente: TComboBox
+    Left = 8
+    Height = 23
+    Top = 32
+    Width = 128
+    ItemHeight = 15
+    OnChange = ComboBoxClienteChange
+    OnClick = ComboBoxClienteClick
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object ComboBoxProduto: TComboBox
+    Left = 8
+    Height = 23
+    Top = 72
+    Width = 128
+    ItemHeight = 15
+    OnChange = ComboBoxProdutoChange
+    OnClick = ComboBoxProdutoClick
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object Label1: TLabel
+    Left = 8
+    Height = 15
+    Top = 16
+    Width = 42
+    Caption = 'Clientes'
+    ParentColor = False
+  end
+  object StringGrid1: TStringGrid
+    Left = 8
+    Height = 112
+    Top = 112
+    Width = 352
+    ColCount = 4
+    Columns = <    
+      item
+        Title.Caption = 'Nome'
+        Width = 107
+      end    
+      item
+        Title.Caption = 'Qtd'
+        Width = 75
+      end    
+      item
+        Title.Caption = 'Preço Uni'
+        Width = 73
+      end    
+      item
+        Title.Caption = 'Valor total'
+        Width = 74
+      end>
+    FixedCols = 0
+    RowCount = 1
+    TabOrder = 2
+    OnDblClick = StringGrid1DblClick
+    ColWidths = (
+      107
+      75
+      73
+      74
+    )
+  end
+  object Button1: TButton
+    Left = 384
+    Height = 25
+    Top = 72
+    Width = 75
+    Caption = 'Adicionar'
+    OnClick = btnAddGrid
+    TabOrder = 3
+  end
+  object textQuantidade: TEdit
+    Left = 168
+    Height = 23
+    Top = 72
+    Width = 80
+    NumbersOnly = True
+    OnChange = textQuantidadeChange
+    TabOrder = 4
+  end
+  object textTotal: TEdit
+    Left = 288
+    Height = 23
+    Top = 72
+    Width = 80
+    Enabled = False
+    OnChange = textTotalChange
+    TabOrder = 5
+  end
+  object Label2: TLabel
+    Left = 8
+    Height = 15
+    Top = 56
+    Width = 48
+    Caption = 'Produtos'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 288
+    Height = 15
+    Top = 56
+    Width = 25
+    Caption = 'Total'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 168
+    Height = 15
+    Top = 56
+    Width = 62
+    Caption = 'Quantidade'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 104
+    Height = 15
+    Top = 240
+    Width = 82
+    Caption = 'Total da venda: '
+    ParentColor = False
+  end
+  object textTotalVenda: TEdit
+    Left = 192
+    Height = 23
+    Top = 232
+    Width = 80
+    OnChange = textTotalVendaChange
+    TabOrder = 6
+  end
+  object countVendas: TEdit
+    Left = 283
+    Height = 23
+    Top = 8
+    Width = 80
+    Enabled = False
+    ReadOnly = True
+    TabOrder = 7
+    Text = '0'
+  end
+  object totalVendas: TLabel
+    Left = 174
+    Height = 15
+    Top = 12
+    Width = 98
+    Caption = 'Número da venda:'
+    ParentColor = False
+  end
+  object btnSalvarArquivo: TButton
+    Left = 288
+    Height = 25
+    Top = 230
+    Width = 75
+    Caption = 'Salvar'
+    OnClick = btnSalvarArquivoClick
+    TabOrder = 8
+  end
+  object listVendas: TListBox
+    Left = 584
+    Height = 112
+    Top = 112
+    Width = 176
+    ItemHeight = 0
+    OnDblClick = listVendasDblClick
+    TabOrder = 9
+  end
+  object Label6: TLabel
+    Left = 584
+    Height = 15
+    Top = 96
+    Width = 106
+    Caption = 'Vendas já efetuadas:'
+    ParentColor = False
+  end
+end
