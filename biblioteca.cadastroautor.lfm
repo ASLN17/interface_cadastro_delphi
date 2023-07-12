@@ -1,0 +1,94 @@
+object frmAutor: TfrmAutor
+  Left = 283
+  Height = 296
+  Top = 250
+  Width = 406
+  Caption = 'frmAutor'
+  ClientHeight = 296
+  ClientWidth = 406
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '2.2.6.0'
+  object labelNomeAutor: TLabel
+    Left = 24
+    Height = 15
+    Top = 16
+    Width = 33
+    Caption = 'Nome'
+    ParentColor = False
+  end
+  object labelIdade: TLabel
+    Left = 24
+    Height = 15
+    Top = 80
+    Width = 29
+    Caption = 'Idade'
+    ParentColor = False
+  end
+  object labelCidade: TLabel
+    Left = 24
+    Height = 15
+    Top = 144
+    Width = 37
+    Caption = 'Cidade'
+    ParentColor = False
+  end
+  object ListBoxAutor: TListBox
+    Left = 216
+    Height = 176
+    Top = 40
+    Width = 168
+    ItemHeight = 0
+    OnDblClick = ListBoxAutorDblClick
+    TabOrder = 0
+  end
+  object btnAdicionarAutor: TButton
+    Left = 24
+    Height = 25
+    Top = 256
+    Width = 75
+    Caption = 'Adicionar'
+    OnClick = btnAdicionarAutorClick
+    TabOrder = 1
+  end
+  object labelNomeAutor1: TLabel
+    Left = 24
+    Height = 15
+    Top = 201
+    Width = 39
+    Caption = 'Código'
+    ParentColor = False
+  end
+  object textAutor: TEdit
+    Left = 24
+    Height = 23
+    Top = 40
+    Width = 80
+    TabOrder = 2
+  end
+  object textCidade: TEdit
+    Left = 24
+    Height = 23
+    Top = 168
+    Width = 80
+    TabOrder = 3
+  end
+  object textCodigo: TEdit
+    Left = 24
+    Height = 23
+    Top = 224
+    Width = 80
+    Enabled = False
+    ReadOnly = True
+    TabOrder = 4
+  end
+  object textIdade: TEdit
+    Left = 24
+    Height = 23
+    Top = 104
+    Width = 80
+    NumbersOnly = True
+    TabOrder = 5
+  end
+end

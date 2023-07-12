@@ -1,0 +1,25 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 203
+  HorizontalOffset = 283
+  VerticalOffset = 250
+  Width = 235
+  object Conexao: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = True
+    Properties.Strings = (
+      'AutoEncodeStrings=True'
+      'controls_cp=CP_UTF8'
+    )
+    Connected = True
+    HostName = 'localhost'
+    Port = 5433
+    Database = 'biblioteca'
+    User = 'postgres'
+    Password = 'postgresql_glb_*sys'
+    Protocol = 'postgresql'
+    LibraryLocation = 'C:\Fontes\Vendas\libpq.dll'
+    Left = 32
+    Top = 32
+  end
+end

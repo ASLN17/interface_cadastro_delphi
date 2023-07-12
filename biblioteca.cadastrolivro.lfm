@@ -1,0 +1,101 @@
+object formLivro: TformLivro
+  Left = 283
+  Height = 444
+  Top = 250
+  Width = 573
+  Caption = 'formLivro'
+  ClientHeight = 444
+  ClientWidth = 573
+  OnCreate = FormCreate
+  object textLivro: TEdit
+    Left = 18
+    Height = 23
+    Top = 40
+    Width = 80
+    TabOrder = 0
+  end
+  object labelAno: TLabel
+    Left = 18
+    Height = 15
+    Top = 80
+    Width = 104
+    Caption = 'Ano de lançamento'
+    ParentColor = False
+  end
+  object textAno: TEdit
+    Left = 18
+    Height = 23
+    Top = 104
+    Width = 80
+    MaxLength = 4
+    NumbersOnly = True
+    TabOrder = 1
+  end
+  object Autor: TLabel
+    Left = 18
+    Height = 15
+    Top = 152
+    Width = 30
+    Caption = 'Autor'
+    ParentColor = False
+  end
+  object btnSalvarLivro: TButton
+    Left = 18
+    Height = 25
+    Top = 232
+    Width = 75
+    Caption = 'Salvar'
+    OnClick = btnSalvarLivroClick
+    TabOrder = 2
+  end
+  object listBoxLivros: TListBox
+    Left = 288
+    Height = 144
+    Top = 40
+    Width = 208
+    ItemHeight = 0
+    OnDblClick = listBoxLivrosDblClick
+    TabOrder = 3
+  end
+  object labelLivrosCadastrados: TLabel
+    Left = 288
+    Height = 15
+    Top = 21
+    Width = 97
+    Caption = 'Livros cadastrados'
+    ParentColor = False
+  end
+  object textCodigoAutor: TEdit
+    Left = 16
+    Height = 23
+    Top = 176
+    Width = 24
+    NumbersOnly = True
+    OnChange = textCodigoAutorChange
+    TabOrder = 4
+  end
+  object textNomeAutor: TEdit
+    Left = 48
+    Height = 23
+    Top = 176
+    Width = 136
+    Enabled = False
+    TabOrder = 5
+  end
+  object labelNome: TLabel
+    Left = 16
+    Height = 15
+    Top = 16
+    Width = 33
+    Caption = 'Nome'
+    ParentColor = False
+  end
+  object textCodigoLivro: TEdit
+    Left = 288
+    Height = 23
+    Top = 192
+    Width = 24
+    Enabled = False
+    TabOrder = 6
+  end
+end
