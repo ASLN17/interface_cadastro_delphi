@@ -42,7 +42,7 @@ implementation
 procedure TformCadastroProduto.btnAdicionarProdutoClick(Sender: TObject);
 begin
   ListBoxProd.Items.add(textNomeProduto.text+'|'+textPreco.text);
-  textNomeProduto.text:='';
+  textNomeProduto.Text:='';
   textNomeProduto.SetFocus;
   textPreco.text:='';
   textPreco.SetFocus;

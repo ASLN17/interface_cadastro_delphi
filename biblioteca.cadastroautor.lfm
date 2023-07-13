@@ -6,10 +6,8 @@ object frmAutor: TfrmAutor
   Caption = 'frmAutor'
   ClientHeight = 296
   ClientWidth = 406
-  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '2.2.6.0'
   object labelNomeAutor: TLabel
     Left = 24
     Height = 15
@@ -35,9 +33,9 @@ object frmAutor: TfrmAutor
     ParentColor = False
   end
   object ListBoxAutor: TListBox
-    Left = 216
+    Left = 192
     Height = 176
-    Top = 40
+    Top = 24
     Width = 168
     ItemHeight = 0
     OnDblClick = ListBoxAutorDblClick
@@ -88,7 +86,17 @@ object frmAutor: TfrmAutor
     Height = 23
     Top = 104
     Width = 80
+    MaxLength = 2
     NumbersOnly = True
     TabOrder = 5
+  end
+  object btnExcluir: TButton
+    Left = 285
+    Height = 25
+    Top = 216
+    Width = 75
+    Caption = 'Excluir'
+    OnClick = btnExcluirClick
+    TabOrder = 6
   end
 end

@@ -7,6 +7,7 @@ object formLivro: TformLivro
   ClientHeight = 444
   ClientWidth = 573
   OnCreate = FormCreate
+  OnShow = FormShow
   object textLivro: TEdit
     Left = 18
     Height = 23
@@ -97,5 +98,14 @@ object formLivro: TformLivro
     Width = 24
     Enabled = False
     TabOrder = 6
+  end
+  object btnExcluirLivro: TButton
+    Left = 421
+    Height = 25
+    Top = 192
+    Width = 75
+    Caption = 'Excluir'
+    OnClick = btnExcluirLivroClick
+    TabOrder = 7
   end
 end

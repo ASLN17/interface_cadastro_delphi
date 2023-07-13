@@ -5,7 +5,7 @@ unit biblioteca.autor;
 interface
 
 uses
-  Classes, SysUtils, biblioteca.dm, ZDataset, StrUtils,Generics.Collections;
+  Classes, SysUtils, biblioteca.dm, ZDataset, StrUtils,Generics.Collections, Dialogs;
 
 type
 
@@ -17,18 +17,16 @@ type
     FIdade:integer;
     FCidade:String;
     FCodigo:integer;
-
   public
     property Nome:String read FNome write FNome;
     property Idade:integer read FIdade write FIdade;
     property Cidade:String read FCidade write FCidade;
     property Codigo:integer read FCodigo write FCodigo;
     function RetornaLinhaComPipe:String;
-    procedure PreencheCamposPorLinha(ALinha:String);
-    procedure GerarCodigo;
     procedure GravarBanco();
     procedure BuscarPorCodigo(ACodigo:Integer);
     function ListarTodos: TList<TAutor>;
+    function ExcluirAutor(Acodigo:Integer):Boolean;
 end;
 implementation
 
@@ -36,47 +34,9 @@ implementation
 
 function TAutor.RetornaLinhaComPipe: String;
 begin
-  Result:= inttostr(FCodigo) + '|' + FNome + '|' + inttostr(Fidade) + '|' + FCidade;
+  Result:= inttostr(FCodigo) + ' - ' + FNome;
 end;
 
-procedure TAutor.PreencheCamposPorLinha(ALinha: String);
-var
-  vetor:TStringArray;
-begin
-  vetor:= SplitString(ALinha,'|');
-  FCodigo:= strtoint(vetor[0]);
-  FNome:= vetor[1];
-  Fidade:= strtoint(vetor[2]);
-  Fcidade:= vetor[3];
-end;
-procedure TAutor.GerarCodigo;
-begin
-{var
-  contador:TextFile;
-  LCodigoAtual:Integer;
-  linhaArquivo:String;
-begin
-  if not FileExists('contador_autores.txt') then
-  begin
-       AssignFIle(contador, 'contador_autores.txt');
-       rewrite(contador);
-       writeln(contador, '0');
-       closefile(contador);
-  end;
-
-  if fileexists('contador_autores.txt') then
-  begin
-       AssignFile(contador, 'contador_autores.txt');
-       reset(contador);
-       readln(contador, linhaArquivo);
-       LCodigoAtual:=strtoint(linhaArquivo)+1;
-       FCodigo := LCodigoAtual;
-       rewrite(contador);
-       writeln(contador, FCodigo);
-       closefile(contador);
-  end;
-  }
-end;
 function TAutor.ListarTodos():TList<TAutor>;
 var
   query:TZquery;
@@ -103,14 +63,14 @@ begin
 
    Result:=LListaAutores;
 end;
+
 procedure TAutor.GravarBanco();
 var
   query:TZquery;
 begin
    query:=Tzquery.Create(nil);
    query.Connection:=DM.Conexao;
-
-   if FCOdigo=0 then
+   if FCodigo=0 then
    begin
         query.SQL.Add('insert into autor values(default,:pnome, :pidade, :pcidade) returning codigo');
    end
@@ -119,18 +79,15 @@ begin
         query.SQL.Add('update autor set nome=:pnome,idade=:pidade, cidade=:pcidade where codigo=:pcodigo returning codigo');
         query.ParamByName('pcodigo').AsInteger := FCodigo;
    end;
-
    query.ParamByName('pnome').AsString := FNome;
    query.ParamByName('pidade').AsInteger := FIdade;
    query.ParamByName('pcidade').AsString := FCidade;
-
    query.open;
    if not query.EOF then
    begin
       FCodigo := query.FieldByName('codigo').AsInteger;
    end;
    query.close;
-
    query.free;
 end;
 
@@ -152,6 +109,33 @@ begin
    end;
    query.Close;
    query.free;
+end;
+
+function TAutor.ExcluirAutor(Acodigo:Integer):Boolean;
+var
+   query:TZquery;
+   queryExclusao:TZquery;
+begin
+   Result:=false;
+   query:=TZquery.Create(nil);
+   queryExclusao:=TZquery.create(nil);
+   query.Connection:=Dm.Conexao;
+   queryExclusao.Connection:=Dm.Conexao;
+   query.sql.Clear;
+   query.SQL.add('select * from livro where codigoAutor=:pcodigoautor');
+   query.ParamByName('pcodigoautor').asinteger := Acodigo;
+   query.Open;
+   if query.EOF then
+   begin
+      queryExclusao.sql.Clear;
+      queryExclusao.SQL.add('delete from autor where codigo=:pcodigo');
+      queryExclusao.ParamByName('pcodigo').asInteger := Acodigo;
+      queryExclusao.ExecSQL;
+      Result:=true
+   end;
+   query.close;
+   queryExclusao.free;
+   query.Free;
 end;
 
 end.

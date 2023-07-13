@@ -6,7 +6,6 @@ object formVendas: TformVendas
   Caption = 'Vender'
   ClientHeight = 416
   ClientWidth = 760
-  OnCreate = FormCreate
   OnHide = FormHide
   OnShow = FormShow
   LCLVersion = '2.2.6.0'
@@ -16,8 +15,6 @@ object formVendas: TformVendas
     Top = 32
     Width = 128
     ItemHeight = 15
-    OnChange = ComboBoxClienteChange
-    OnClick = ComboBoxClienteClick
     Style = csDropDownList
     TabOrder = 0
   end
@@ -27,8 +24,6 @@ object formVendas: TformVendas
     Top = 72
     Width = 128
     ItemHeight = 15
-    OnChange = ComboBoxProdutoChange
-    OnClick = ComboBoxProdutoClick
     Style = csDropDownList
     TabOrder = 1
   end
@@ -98,7 +93,6 @@ object formVendas: TformVendas
     Top = 72
     Width = 80
     Enabled = False
-    OnChange = textTotalChange
     TabOrder = 5
   end
   object Label2: TLabel
@@ -138,7 +132,6 @@ object formVendas: TformVendas
     Height = 23
     Top = 232
     Width = 80
-    OnChange = textTotalVendaChange
     TabOrder = 6
   end
   object countVendas: TEdit
