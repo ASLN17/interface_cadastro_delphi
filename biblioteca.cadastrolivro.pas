@@ -16,6 +16,7 @@ type
   TFormLivro = class(TForm)
     Autor: TLabel;
     btnSalvarLivro: TButton;
+    btnExcluirLivro: TButton;
     labelNome: TLabel;
     labelLivrosCadastrados: TLabel;
     listBoxLivros: TListBox;
@@ -25,8 +26,10 @@ type
     textCodigoLivro: TEdit;
     textNomeAutor: TEdit;
     textLivro: TEdit;
+    procedure btnExcluirLivroClick(Sender: TObject);
     procedure btnSalvarLivroClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure listBoxLivrosDblClick(Sender: TObject);
     procedure textCodigoAutorChange(Sender: TObject);
   private
@@ -42,11 +45,17 @@ implementation
 
 {$R *.lfm}
 
+procedure TFormLivro.limparTelaLivro;
+  begin
+    textLivro.Text := '';
+    textNomeAutor.text:='';
+    textCodigoAutor.Text := '';
+    textAno.text:='';
+    end;
+
 procedure TFormLivro.btnSalvarLivroClick(Sender: TObject);
 var
   LLivro:Tlivro;
-  arqLivro:TextFile;
-  i:integer;
 begin
      if textNomeAutor.Text='' then
      begin
@@ -58,25 +67,46 @@ begin
         ShowMessage('Ano inválido');
         exit;
      end;
-     //
+     if textLivro.text = '' then
+     begin
+        ShowMessage('Informe o livro');
+        exit;
+     end;
      LLivro:=Tlivro.Create;
      LLivro.Nome:=textLivro.text;
      LLivro.Ano:= strtoint(textAno.text);
      LLivro.autor.Codigo := strtoint(textCodigoAutor.text);
-
      if(textCodigoLivro.text='') then LLivro.codigo := 0
      else LLivro.codigo := strtoint(textCodigoLivro.Text);
-
      LLivro.GravarBanco();
      textCodigoLivro.Text := inttostr(llivro.codigo);
      listBoxLivros.Items.Add(LLivro.RetornaLinhaComPipe);
+     limparTelaLivro;
      LLivro.free;
+end;
+
+procedure TFormLivro.btnExcluirLivroClick(Sender: TObject);
+var
+  LLivro:TLivro;
+  vetor:TStringArray;
+  codigo:Integer;
+begin
+   LLivro:=TLivro.Create;
+   vetor:=listBoxLivros.GetSelectedText.Split(' - ');
+   codigo:=strtoint(vetor[0]);
+   if MessageDlg('Deseja mesmo excluir?', mtWarning, [mbYes, mbNo], 0,mbNo) = mrYes then
+   begin
+     if LLivro.ExcluirLivro(codigo) = true then
+     begin
+     ShowMessage('Livro excluído com sucesso.');
+     listBoxLivros.DeleteSelected;
+     end
+     else ShowMessage('Não foi possível excluir.');
+   end;
 end;
 
 procedure TFormLivro.FormCreate(Sender: TObject);
 var
-  arq:textfile;
-  linha:String;
   LLivro:TLivro;
   LLista:TList<TLivro>;
   i:Integer;
@@ -91,19 +121,25 @@ begin
   LLivro.free;
 end;
 
+procedure TFormLivro.FormShow(Sender: TObject);
+begin
+   limparTelaLivro;
+end;
+
 procedure TFormLivro.listBoxLivrosDblClick(Sender: TObject);
 var
  LLivro:Tlivro;
 begin
   if listBoxLivros.GetSelectedText = '' then exit;
   LLivro:=Tlivro.Create;
-  LLivro.PreencheCamposPorLinha(listBoxLivros.GetSelectedText);
+  LLivro.BuscarPorCodigo(strtoint(listBoxLivros.GetSelectedText.Split(' - ')[0]));
   textLivro.Text:=llivro.nome;
   textAno.text:= inttostr(llivro.ano);
   textCodigoAutor.text:= inttostr(llivro.Autor.Codigo);
   textNomeAutor.text:=llivro.autor.Nome;
   textCodigoLivro.Text := inttostr(llivro.codigo);
   LLivro.Free;
+  listBoxLivros.DeleteSelected;
 end;
 
 procedure TFormLivro.textCodigoAutorChange(Sender: TObject);
@@ -122,26 +158,5 @@ begin
    query.Free;
 end;
 
-procedure TFormLivro.limparTelaLivro;
-  begin
-    textLivro.Text := '';
-    textNomeAutor.text:='';
-    textCodigoAutor.Text := '';
-    textAno.text:='';
-  end;
-{procedure TFormLivro.GravarArquivo(linhaArquivo:String);
-var
-  arqLivros: TextFile;
-  i:integer;
-  linha:string;
-  begin
-    linha:=linhaArquivo;
-    AssignFile(arqLivros, 'livros.txt');
-    if FileExists('livros.txt') then Append(arqLivros)
-    else Rewrite(arqLivros);
-    writeln(arqLivros, linha);
-    closefile(arqLivros);
-end;
-}
 end.
 

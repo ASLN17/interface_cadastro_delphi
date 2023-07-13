@@ -24,12 +24,12 @@ type
     property ano:integer read FAno write FAno;
     property Autor:TAutor read FAutor write FAutor;
     function RetornaLinhaComPipe:String;
-    procedure PreencheCamposPorLinha(ALinha: String);
     procedure GravarBanco();
     procedure BuscarPorCodigo(ACodigo:Integer);
     function ListarTodos: TList<TLivro>;
     constructor Create;
     destructor Destroy;override;
+    function ExcluirLivro(Acodigo:Integer):Boolean;
   end;
 
 implementation
@@ -38,18 +38,7 @@ implementation
 
 function TLivro.RetornaLinhaComPipe: String;
 begin
-  Result:= inttostr(FCodigo) + '|' + FNome + '|' + inttostr(FAno) + '|' + inttostr(FAutor.Codigo) + '|' + FAutor.Nome;
-end;
-
-procedure TLivro.PreencheCamposPorLinha(ALinha: String);
-var
-  vetor:TStringArray;
-begin
-  vetor:= SplitString(ALinha,'|');
-  FCodigo:=strtoint(vetor[0]);
-  FNome:= vetor[1];
-  FAno:= strtoint(vetor[2]);
-  FAutor.BuscarPorCodigo(strtoint(vetor[3]));
+  Result:= inttostr(FCodigo) + ' - ' + FNome;
 end;
 
 function TLivro.ListarTodos():TList<TLivro>;
@@ -118,6 +107,21 @@ begin
      query.ExecSQL;
    end;
    query.free;
+end;
+
+function TLivro.ExcluirLivro(Acodigo:Integer):Boolean;
+var
+  query:TZQuery;
+begin
+    query:=TZQuery.Create(nil);
+    query.Connection:=DM.Conexao;
+    query.SQL.Clear;
+    query.sql.Add('delete from livro where codigo=:pcodigo');
+    query.ParamByName('pcodigo').AsInteger:=Acodigo;
+    query.execSQL;
+    query.close;
+    query.free;
+    Result:=true;
 end;
 
 procedure TLivro.BuscarPorCodigo(ACodigo: Integer);
