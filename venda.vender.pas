@@ -32,18 +32,11 @@ type
     StringGrid1: TStringGrid;
     procedure btnAddGrid(Sender: TObject);
     procedure btnSalvarArquivoClick(Sender: TObject);
-    procedure ComboBoxClienteChange(Sender: TObject);
-    procedure ComboBoxClienteClick(Sender: TObject);
-    procedure ComboBoxProdutoChange(Sender: TObject);
-    procedure ComboBoxProdutoClick(Sender: TObject);
     procedure FormHide(Sender: TObject);
     procedure listVendasDblClick(Sender: TObject);
     procedure StringGrid1DblClick(Sender: TObject);
     procedure textQuantidadeChange(Sender: TObject);
-    procedure textTotalChange(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure textTotalVendaChange(Sender: TObject);
   private
      procedure CalculaTotal;
      procedure MostraVenda;
@@ -61,15 +54,6 @@ implementation
 {$R *.lfm}
 
 { TformVendas }
-
-procedure TformVendas.ComboBoxClienteClick(Sender: TObject);
-begin
-end;
-
-procedure TformVendas.ComboBoxProdutoChange(Sender: TObject);
-begin
-
-end;
 
 procedure TformVendas.btnAddGrid(Sender: TObject);
 var
@@ -133,15 +117,6 @@ begin
   MostraVenda;
 end;
 
-procedure TformVendas.ComboBoxClienteChange(Sender: TObject);
-begin
-
-end;
-
-procedure TformVendas.ComboBoxProdutoClick(Sender: TObject);
-begin
-end;
-
 procedure TformVendas.FormHide(Sender: TObject);
 var
 i, j:integer;
@@ -187,15 +162,12 @@ begin
           ComboBoxCliente.Text:=valorLinha;
          end
          else
-         begin
-
            case numeroLinhaLida of
            3:
              begin
                 inc(i);
                StringGrid1.RowCount:=StringGrid1.RowCount+1;
                StringGrid1.Cells[0,i]:=linhaArquivo;
-
              end;
            4: StringGrid1.Cells[1,i]:=linhaArquivo;
            5: StringGrid1.Cells[2,i]:=linhaArquivo;
@@ -204,7 +176,7 @@ begin
            end;
          end;
          inc(numeroLinhaLida);
-        end;
+
         closefile(f);
         CalculaTotal;
 end;
@@ -224,16 +196,6 @@ begin
   textTotal.Text:=FloatToStr( StrToFloat(LValorProduto)*StrToFloat(textQuantidade.text));
 end;
 
-procedure TformVendas.textTotalChange(Sender: TObject);
-begin
-
-end;
-
-procedure TformVendas.FormCreate(Sender: TObject);
-begin
-
-end;
-
 procedure TformVendas.FormShow(Sender: TObject);
 var
   i:integer;
@@ -242,6 +204,7 @@ var
   teste:integer;
 begin
   ComboBoxCliente.Items.Clear;
+           {
  for i:= 0 to formCliente.ListBox1.Items.Count-1 do
  begin
    nome:=formCliente.ListBox1.Items[i];
@@ -257,12 +220,7 @@ begin
     ComboBoxProduto.Items.AddPair(nome,preco);
     teste:=ComboBoxProduto.Items.Count;
   end;
-  MostraVenda;
-end;
-
-procedure TformVendas.textTotalVendaChange(Sender: TObject);
-begin
-
+  MostraVenda;  }
 end;
 
 procedure TformVendas.CalculaTotal;

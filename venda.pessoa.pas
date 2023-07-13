@@ -8,6 +8,9 @@ uses
   Classes, SysUtils;
 
 type
+
+  { TPessoa }
+
   TPessoa=class(TObject)
 
 	private
@@ -19,10 +22,18 @@ type
     public
       property Idade:Integer read FIdade write FIdade;
       property Nome:String read FNome write FNome;
+      function funcao:String;
 
   end;
 
 implementation
+
+{ TPessoa }
+
+function TPessoa.funcao: String;
+begin
+       result:='';
+end;
 
 end.
 

@@ -1,12 +1,13 @@
 unit venda.principal;
 
-{$mode objfpc}{$H+}
+{$mode Delphi}{$H+}
 
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  venda.cliente, venda.produto, venda.vender;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Grids,
+  venda.cliente, venda.produto, venda.vender, biblioteca.autor,
+  biblioteca.cadastroautor, biblioteca.cadastroLivro;
 
 type
 
@@ -14,15 +15,18 @@ type
 
   TformPrincipal = class(TForm)
     btnCadastroCliente: TButton;
-    btnVendas: TButton;
     btnCadastroProduto: TButton;
-    btnVendas1: TButton;
-    btnVendas2: TButton;
+    btnVendas: TButton;
+    btnCadastroAutor: TButton;
+    btnCadastroLivro: TButton;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
     procedure btnCadastroClienteClick(Sender: TObject);
+    procedure btnCadastroLivroClick(Sender: TObject);
     procedure btnCadastroProdutoClick(Sender: TObject);
-    procedure btnVendas2Click(Sender: TObject);
     procedure btnVendasClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
+    procedure btnCadastroAutorClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: char);
   private
 
   public
@@ -40,49 +44,44 @@ implementation
 
 procedure TformPrincipal.btnCadastroClienteClick(Sender: TObject);
 begin
-formCliente.ShowModal;
+     formCliente.ShowModal;
+end;
+
+procedure TformPrincipal.btnCadastroLivroClick(Sender: TObject);
+var
+  frmLivro:TFormLivro;
+begin
+     frmLivro:=TformLivro.Create(Self);
+     frmLivro.showModal;
+     frmLivro.Free;
 end;
 
 procedure TformPrincipal.btnCadastroProdutoClick(Sender: TObject);
 begin
-  formCadastroProduto.ShowModal;
-end;
-
-procedure TformPrincipal.btnVendas2Click(Sender: TObject);
-  var
-   lform:TformCliente;
-   i:integer;
-begin
-   for i := 0 to 1000 do
-   begin
-        lform:=TformCliente.Create(self);
-   end;
-
+     formCadastroProduto.ShowModal;
 end;
 
 procedure TformPrincipal.btnVendasClick(Sender: TObject);
+var
+  formVendas:TformVendas;
 begin
-  formVendas.ShowModal;
+     formVendas:=TformVendas.Create(Self);
+     formVendas.ShowModal;
+     formVendas.Free;
 end;
 
-procedure TformPrincipal.FormCreate(Sender: TObject);
+procedure TformPrincipal.btnCadastroAutorClick(Sender: TObject);
 var
-  fc:TextFile;
-  fp:TextFile;
-  arq, registroVenda:TextFile;
+  frm:TfrmAutor;
 begin
-  AssignFile(fc, 'clientes.txt');
-  AssignFile(fp, 'produtos.txt');
-  AssignFile(arq, 'total.txt');
+  frm:=TfrmAutor.Create(Self);
+  frm.showModal;
+  frm.free;
+end;
 
-  if not FileExists('registroVendas.txt') then
-  begin
-       AssignFile(registroVenda, 'registroVendas.txt');
-       Rewrite(registroVenda);
-       writeln(registroVenda, '0');
-       CloseFile(registroVenda);
-  end;
-
+procedure TformPrincipal.FormKeyPress(Sender: TObject; var Key: char);
+begin
+    ShowMessage('Pressionou ' + key );
 end;
 
 end.
