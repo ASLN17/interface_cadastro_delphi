@@ -6,7 +6,9 @@ object formCliente: TformCliente
   Caption = 'Cadastro de Cliente'
   ClientHeight = 310
   ClientWidth = 657
-  OnDblClick = btnRemoverClienteClick
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '2.2.6.0'
   object textNome: TEdit
     Left = 49
     Height = 23
@@ -20,16 +22,15 @@ object formCliente: TformCliente
     Top = 72
     Width = 206
     ItemHeight = 0
-    OnDblClick = btnRemoverClienteClick
     TabOrder = 1
   end
-  object btnAdicionarCliente: TButton
+  object btnExcluirCliente: TButton
     Left = 144
     Height = 25
     Top = 192
     Width = 112
-    Caption = 'Adicionar Cliente'
-    OnClick = btnAdicionarClienteClick
+    Caption = 'Excluir'
+    OnClick = btnExcluirClienteClick
     TabOrder = 2
   end
   object textIdade: TEdit
@@ -55,6 +56,7 @@ object formCliente: TformCliente
     Top = 192
     Width = 75
     Caption = 'Salvar'
+    OnClick = btnSalvarClienteClick
     TabOrder = 4
   end
   object labelIdade: TLabel
@@ -64,5 +66,14 @@ object formCliente: TformCliente
     Width = 29
     Caption = 'Idade'
     ParentColor = False
+  end
+  object textCodigo: TEdit
+    Left = 272
+    Height = 23
+    Top = 30
+    Width = 32
+    Enabled = False
+    NumbersOnly = True
+    TabOrder = 5
   end
 end

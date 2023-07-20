@@ -60,7 +60,6 @@ begin
    end;
    query.Close;
    query.free;
-
    Result:=LListaAutores;
 end;
 

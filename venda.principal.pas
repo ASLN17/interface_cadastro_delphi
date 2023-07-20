@@ -26,11 +26,7 @@ type
     procedure btnCadastroProdutoClick(Sender: TObject);
     procedure btnVendasClick(Sender: TObject);
     procedure btnCadastroAutorClick(Sender: TObject);
-    procedure FormKeyPress(Sender: TObject; var Key: char);
   private
-
-  public
-
   end;
 
 var
@@ -77,11 +73,6 @@ begin
   frm:=TfrmAutor.Create(Self);
   frm.showModal;
   frm.free;
-end;
-
-procedure TformPrincipal.FormKeyPress(Sender: TObject; var Key: char);
-begin
-    ShowMessage('Pressionou ' + key );
 end;
 
 end.

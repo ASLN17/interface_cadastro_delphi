@@ -7,7 +7,7 @@ object formPrincipal: TformPrincipal
   ClientHeight = 396
   ClientWidth = 560
   KeyPreview = True
-  OnKeyPress = FormKeyPress
+  LCLVersion = '2.2.6.0'
   object GroupBox1: TGroupBox
     Left = 48
     Height = 177

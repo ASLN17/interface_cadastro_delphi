@@ -27,9 +27,9 @@ type
     procedure GravarBanco();
     procedure BuscarPorCodigo(ACodigo:Integer);
     function ListarTodos: TList<TLivro>;
+    function ExcluirLivro(Acodigo:Integer):Boolean;
     constructor Create;
     destructor Destroy;override;
-    function ExcluirLivro(Acodigo:Integer):Boolean;
   end;
 
 implementation
